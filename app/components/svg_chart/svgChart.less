@@ -1,0 +1,87 @@
+.graph {
+  background-color: #F6F7F8;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+}
+
+.graph .labels.x-labels {
+  text-anchor: middle;
+}
+
+.graph .labels.y-labels {
+  text-anchor: end;
+}
+
+.graph .grid {
+  stroke: #ddd;
+  stroke-dasharray: 0;
+  stroke-width: 1;
+}
+
+.labels {
+  font-size: 12px;
+  text {
+    fill: #999;
+  }
+}
+
+.label-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  fill: black;
+}
+
+.point {
+  fill: #74a3c7;
+  stroke-width: 3px;
+  z-index: 1;
+  stroke: #F6F7F8;
+
+  &__info {
+    fill: #fff;
+    stroke-width: 1;
+    stroke: #eee;
+  }
+
+  &__info-date {
+    fill: #9299a2;
+    font-size: 12px;
+  }
+  &__info-value {
+    fill: #434c5b;
+    font-size: 14px;
+  }
+  &__info-delta {
+    font-size: 14px;
+
+    &_green {
+      fill: #22a053;
+    }
+    &_red {
+      fill: #b32523;
+    }
+  }
+  &__info-arrow {
+    &_green {
+      fill: #22a053;
+    }
+    &_red {
+      fill: #b32523;
+    }
+  }
+
+
+
+
+}
+
+.path {
+  stroke: #74a3c7;
+}
+
+.point__line {
+  stroke: #d5d8d9;
+  stroke-dasharray: 5,5;
+}
+

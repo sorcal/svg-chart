@@ -1,0 +1,68 @@
+<svg version="1.2"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 class="graph"
+	 role="img"
+	 ng-attr-width="{{$ctrl.svgWidth}}"
+	 ng-attr-height="{{$ctrl.svgHeight}}"
+	 ng-mousemove="$ctrl.togglePointDetail($event)">
+	<g class="grid y-grid">
+		<line ng-repeat="line in $ctrl.horLines" ng-attr-x1="{{line.x1}}" ng-attr-x2="{{line.x2}}" ng-attr-y1="{{line.y1}}" ng-attr-y2="{{line.y2}}"></line>
+	</g>
+	<g class="labels x-labels">
+		<text ng-repeat="lb in $ctrl.vertLabels" ng-attr-x="{{lb.x}}" ng-attr-y="{{lb.y}}">{{lb.label}}</text>
+		<text x="45" y="270" class="label-title">{{$ctrl.currentYear}}</text>
+	</g>
+	<g class="labels y-labels">
+		<text ng-repeat="line in $ctrl.horLines" ng-attr-x="{{$ctrl.zeroPoint[0] - 10}}" ng-attr-y="{{line.y1}}">{{line.label}}</text>
+	</g>
+
+	<path class="path" ng-attr-d="{{$ctrl.graphPath}}" fill="transparent"/>
+
+	<g ng-if="$ctrl.curPoint">
+		<circle class="point" ng-attr-cx="{{$ctrl.curPoint.x}}" ng-attr-cy="{{$ctrl.curPoint.y}}" r="5"></circle>
+		<filter id="dropShadow">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="1" />
+			<feOffset dx="0" dy="2" />
+			<feMerge>
+				<feMergeNode />
+				<feMergeNode in="SourceGraphic"/>
+			</feMerge>
+			<feComponentTransfer>
+				<feFuncA type="linear" slope="0.2"/>
+			</feComponentTransfer>
+		</filter>
+		<rect class="point__info"
+			  ng-attr-x="{{$ctrl.curPoint.info.rectangle.x}}"
+			  ng-attr-y="{{$ctrl.curPoint.info.rectangle.y}}"
+			  rx="3"
+			  ry="3"
+			  ng-attr-width="{{$ctrl.curPoint.info.rectangle.width}}"
+			  ng-attr-height="{{$ctrl.curPoint.info.rectangle.height}}"></rect>
+		<rect class="point__info"
+			  ng-attr-x="{{$ctrl.curPoint.info.rectangle.x}}"
+			  ng-attr-y="{{$ctrl.curPoint.info.rectangle.y}}"
+			  rx="3"
+			  ry="3"
+			  ng-attr-width="{{$ctrl.curPoint.info.rectangle.width}}"
+			  ng-attr-height="{{$ctrl.curPoint.info.rectangle.height}}"
+			  filter="url(#dropShadow)"></rect>
+		<text class="point__info-date"
+			  ng-attr-x="{{$ctrl.curPoint.info.date.x}}"
+			  ng-attr-y="{{$ctrl.curPoint.info.date.y}}">{{$ctrl.curPoint.info.date.value}}</text>
+		<text class="point__info-value"
+			  ng-attr-x="{{$ctrl.curPoint.info.val.x}}"
+			  ng-attr-y="{{$ctrl.curPoint.info.val.y}}">${{$ctrl.curPoint.info.val.value | number:2}}</text>
+		<g ng-if="$ctrl.curPoint.info.delta">
+			<text class="point__info-delta"
+				  ng-class="{'point__info-delta_green': $ctrl.curPoint.info.delta.value > 0, 'point__info-delta_red': $ctrl.curPoint.info.delta.value < 0}"
+				  ng-attr-x="{{$ctrl.curPoint.info.delta.x}}"
+				  ng-attr-y="{{$ctrl.curPoint.info.delta.y}}">{{$ctrl.curPoint.info.delta.value | number:2}}</text>
+			<polygon ng-if="$ctrl.curPoint.info.delta.value" class="point__info-arrow"
+					 ng-class="{'point__info-arrow_green': $ctrl.curPoint.info.delta.value > 0,
+					 	'point__info-arrow_red': $ctrl.curPoint.info.delta.value < 0}"
+					 ng-attr-points="{{$ctrl.curPoint.info.delta.arrow.points}}" />
+		</g>
+		<path class="point__line" ng-attr-d="{{$ctrl.curPoint.info.bottomLine}}" fill="transparent"/>
+	</g>
+
+</svg>

@@ -1,0 +1,21 @@
+{
+  "name": "svg-chart",
+  "description": "",
+  "authors": [
+    "sorcal <gsorcal@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-i18n": "^1.5.8"
+  }
+}
